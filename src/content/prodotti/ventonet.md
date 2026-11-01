@@ -2,7 +2,7 @@
 nome: VentoNet
 tagline: Nodo Art-Net / sACN → DMX su ESP32 con recorder, cue e SD card. Firmware e scheda.
 tipo: firmware
-logo: /logo/prodotti/ventonet.png
+logo: /logo/prodotti/ventonet.jpg
 stato: in-arrivo
 piattaforme: [ESP32 WT32-ETH01]
 ordine: 2

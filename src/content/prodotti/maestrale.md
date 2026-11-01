@@ -2,6 +2,7 @@
 nome: Maestrale
 tagline: Show control touchscreen. Cue, widget, router Art-Net/sACN, tutto su uno schermo che si usa con le dita.
 tipo: software
+logo: /logo/prodotti/maestrale.jpg
 stato: beta
 prezzo: da definire
 piattaforme: [Windows]
