@@ -40,6 +40,9 @@ galleria: [/img/show-1.jpg, /img/show-2.jpg]
 Due righe su cosa è successo.
 ```
 
+### Carosello in home
+Metti le foto in `public/img/hero/` (jpg/png/webp, 1600 px di larghezza, formato 16:9). Vanno in ordine alfabetico: `01-tour.jpg`, `02-maestrale.png`...
+
 ### Immagini e video
 Mettili in `public/img/` e `public/video/`. Nel testo li richiami come `/img/nomefile.jpg`. Tieni le foto sotto 500 KB (ridimensiona a 1600 px di larghezza).
 Il video in home: `public/video/hero.mp4`, poi sostituisci il blocco segnaposto in `src/pages/index.astro`.

@@ -1,0 +1,42 @@
+---
+// Carosello home: mette le immagini in public/img/hero/ (jpg, png, webp).
+// Ordine alfabetico: 01-xxx.jpg, 02-yyy.jpg, ...
+const files = import.meta.glob('/public/img/hero/*.{jpg,jpeg,png,webp}', { eager: false });
+const slides = Object.keys(files).sort().map(p => p.replace('/public', ''));
+---
+<div class="carousel" data-carousel>
+  <div class="track">
+    {slides.length === 0
+      ? [1,2,3].map(i => <div class="slide placeholder">foto {i} · public/img/hero/</div>)
+      : slides.map((src, i) => <div class="slide"><img src={src} alt="" loading={i === 0 ? 'eager' : 'lazy'} /></div>)}
+  </div>
+  {slides.length > 1 && <div class="dots">{slides.map((_, i) => <button type="button" data-i={i} aria-label={`immagine ${i + 1}`}></button>)}</div>}
+</div>
+
+<style>
+  .carousel { position: relative; border: 1px solid var(--line); background: var(--bg-2); }
+  .track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .track::-webkit-scrollbar { display: none; }
+  .slide { flex: 0 0 100%; scroll-snap-align: start; aspect-ratio: 16/9; }
+  .slide img { width: 100%; height: 100%; object-fit: cover; }
+  .slide.placeholder { display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: .8rem; color: var(--fg-3); border-right: 1px dashed var(--line); }
+  .dots { position: absolute; left: 0; right: 0; bottom: .75rem; display: flex; justify-content: center; gap: .4rem; }
+  .dots button { width: 8px; height: 8px; border-radius: 50%; border: 0; background: rgba(255,255,255,.35); padding: 0; cursor: pointer; }
+  .dots button[aria-current="true"] { background: #fff; }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-carousel]').forEach(c => {
+    const track = c.querySelector<HTMLElement>('.track')!;
+    const slides = Array.from(track.children) as HTMLElement[];
+    const dots = Array.from(c.querySelectorAll<HTMLButtonElement>('.dots button'));
+    if (slides.length < 2) return;
+    let i = 0, timer: number;
+    const go = (n: number) => { i = (n + slides.length) % slides.length; track.scrollTo({ left: slides[i].offsetLeft, behavior: 'smooth' }); };
+    const mark = () => dots.forEach((d, k) => d.setAttribute('aria-current', String(k === i)));
+    const start = () => { clearInterval(timer); timer = window.setInterval(() => go(i + 1), 5000); };
+    dots.forEach(d => d.addEventListener('click', () => { go(Number(d.dataset.i)); start(); }));
+    track.addEventListener('scroll', () => { i = Math.round(track.scrollLeft / track.clientWidth); mark(); }, { passive: true });
+    mark(); start();
+  });
+</script>

@@ -1,45 +1,45 @@
 ---
 import Base from '../layouts/Base.astro';
 import ProductCard from '../components/ProductCard.astro';
+import Carousel from '../components/Carousel.astro';
 import { getCollection } from 'astro:content';
 const prodotti = (await getCollection('prodotti')).sort((a, b) => a.data.ordine - b.data.ordine);
-const campo = (await getCollection('campo')).sort((a, b) => b.data.data.valueOf() - a.data.data.valueOf()).slice(0, 3);
+const campo = (await getCollection('campo')).sort((a, b) => b.data.data.valueOf() - a.data.data.valueOf()).slice(0, 6);
 ---
 <Base>
   <section class="hero">
     <div class="wrap">
-      <img src="/logo/ventoland-white.svg" alt="VentoLand" width="96" height="120" style="margin-bottom:1.5rem" />
-      <div class="eyebrow">VentoLand · software e hardware per lo spettacolo</div>
-      <h1>Fatto in palco,<br />per il palco.</h1>
-      <p class="lead">Strumenti per show control, DMX, LED e visual in tempo reale. Scritti da un tecnico luci, usati davvero in tour e in teatro, venduti a prezzi da collega a collega.</p>
-      <p><a class="btn primary" href="/prodotti">Vedi i prodotti</a> &nbsp; <a class="btn" href="/sul-campo">Guarda dove sono stati usati</a></p>
-      <!-- Sostituisci con un tuo video: metti il file in public/video/hero.mp4 -->
-      <div class="placeholder" style="margin-top:2.5rem;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center">
-        qui va il video hero · public/video/hero.mp4
+      <div style="display:flex;align-items:center;gap:1.25rem;margin-bottom:1.5rem">
+        <img src="/logo/ventoland-white.svg" alt="VentoLand" width="64" height="80" />
+        <div>
+          <h1 style="margin:0">Fatto in palco,<br />per il palco.</h1>
+        </div>
       </div>
+      <p class="lead">Strumenti per show control, DMX, LED e visual in tempo reale. Scritti da un tecnico luci, usati davvero in tour e in teatro, venduti a prezzi da collega a collega.</p>
+      <Carousel />
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" id="prodotti">
     <div class="wrap">
-      <div class="eyebrow">Prodotti</div>
+      <div class="eyebrow"><a href="/prodotti">Prodotti →</a></div>
       <div class="grid cols-3">
         {prodotti.map(p => <ProductCard p={p} />)}
       </div>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" id="sul-campo">
     <div class="wrap">
-      <div class="eyebrow">Sul campo</div>
+      <div class="eyebrow"><a href="/sul-campo">Sul campo →</a></div>
       <h2>Spettacoli e lavori dove questi strumenti hanno girato.</h2>
       {campo.length === 0 && <div class="placeholder">Aggiungi un file in src/content/campo/ per far comparire qui il primo lavoro.</div>}
       <div class="grid cols-3">
         {campo.map(c => (
-          <a class="card" href={`/sul-campo/${c.id}`}>
+          <a class="card" href={`/sul-campo/${c.id}`} style={c.data.copertina ? `background-image:linear-gradient(to top, var(--bg) 20%, transparent), url(${c.data.copertina});background-size:cover;background-position:center;min-height:240px;justify-content:flex-end` : ''}>
             <div class="meta"><span>{c.data.data.getFullYear()}</span>{c.data.luogo && <span>{c.data.luogo}</span>}</div>
             <h3>{c.data.titolo}</h3>
-            <p class="tagline">{c.data.ruolo}</p>
+            <p class="tagline" style="flex:0">{c.data.ruolo}</p>
             <div class="meta">{c.data.prodotti.join(' · ')}</div>
           </a>
         ))}
@@ -47,14 +47,23 @@ const campo = (await getCollection('campo')).sort((a, b) => b.data.data.valueOf(
     </div>
   </section>
 
-  <section class="section">
-    <div class="wrap">
-      <div class="eyebrow">Come funziona</div>
-      <div class="grid cols-3">
-        <div class="card"><h3>Licenze semplici</h3><p class="tagline">Compri una volta, la licenza è tua. Aggiornamenti inclusi per un anno. Il software gira offline: nessun check di rete a show iniziato.</p></div>
-        <div class="card"><h3>Pagamento sicuro</h3><p class="tagline">Carta o PayPal, in qualsiasi valuta, fattura automatica. Chiave e download arrivano via email in un minuto.</p></div>
-        <div class="card"><h3>Supporto da chi lo usa</h3><p class="tagline">Se qualcosa non va te lo risolve chi ha scritto il codice, e ha passato le stesse serate in regia.</p></div>
+  <section class="section" id="about">
+    <div class="wrap" style="display:grid;gap:3rem;grid-template-columns:minmax(0,3fr) minmax(0,2fr)">
+      <div class="prose">
+        <div class="eyebrow"><a href="/about">About →</a></div>
+        <h2>Un tecnico che vende ad altri tecnici le cose che si è costruito.</h2>
+        <p>Faccio il tecnico luci, capo squadra, da anni: tour, teatro, eventi. Gli strumenti che trovi qui sono nati sul palco, per risolvere problemi concreti che avevo davanti, e sono stati usati in spettacoli veri prima di arrivare qui.</p>
+        <p>Non è un'azienda software. Prezzi onesti, licenze semplici, supporto di chi ha passato le stesse serate in regia.</p>
+        <p><a href="mailto:info@ventoland.it">info@ventoland.it</a></p>
+      </div>
+      <div class="grid" style="grid-template-columns:1fr">
+        <div class="card" style="min-height:0"><h3>Licenze semplici</h3><p class="tagline">Compri una volta, la licenza è tua. Aggiornamenti inclusi per un anno. Il software gira offline: nessun check di rete a show iniziato.</p></div>
+        <div class="card" style="min-height:0"><h3>Pagamento sicuro</h3><p class="tagline">Carta o PayPal, in qualsiasi valuta, fattura automatica. Chiave e download arrivano via email in un minuto.</p></div>
+        <div class="card" style="min-height:0"><h3>Supporto da chi lo usa</h3><p class="tagline">Se qualcosa non va te lo risolve chi ha scritto il codice.</p></div>
       </div>
     </div>
   </section>
 </Base>
+<style>
+  @media (max-width: 760px) { .wrap[style*="grid"] { grid-template-columns: 1fr !important; } }
+</style>
