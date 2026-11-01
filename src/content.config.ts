@@ -15,6 +15,7 @@ const prodotti = defineCollection({
     repo_url: z.string().url().optional(),
     piattaforme: z.array(z.string()).default([]),
     immagine: z.string().optional(),        // es. /img/maestrale.jpg
+    logo: z.string().optional(),            // es. /logo/prodotti/ventonet.png
     ordine: z.number().default(99),
   }),
 });

@@ -4,10 +4,16 @@ const { p } = Astro.props;
 const d = p.data;
 const statoClass = d.stato === 'disponibile' ? 'ok' : d.stato === 'beta' ? 'warn' : '';
 const statoLabel = { disponibile: 'disponibile', beta: 'beta', 'in-arrivo': 'in arrivo' }[d.stato];
+const logo = d.logo ?? '/logo/ventoland-flat-white.svg';
 ---
-<a class="card" href={`/prodotti/${p.id}`}>
+<a class="card product" href={`/prodotti/${p.id}`}>
   <div class="meta"><span>{d.tipo}</span><span class={`tag ${statoClass}`}>{statoLabel}</span></div>
+  <img class="plogo" src={logo} alt="" loading="lazy" class:list={[{ placeholder: !d.logo }]} />
   <h3>{d.nome}</h3>
   <p class="tagline">{d.tagline}</p>
   <div class="meta">{d.prezzo && <span>{d.prezzo}</span>}{d.piattaforme.length > 0 && <span>{d.piattaforme.join(' · ')}</span>}</div>
 </a>
+<style>
+  .plogo { width: 100%; aspect-ratio: 1; object-fit: contain; background: #000; border: 1px solid var(--line); margin: .25rem 0 .5rem; }
+  .plogo.placeholder { object-fit: none; opacity: .25; }
+</style>

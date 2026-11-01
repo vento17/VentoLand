@@ -19,6 +19,7 @@ prezzo: 49 €
 buy_url: https://...    # link checkout Lemon Squeezy (quando c'è)
 piattaforme: [Windows]
 immagine: /img/maestrale.jpg
+logo: /logo/prodotti/maestrale.png   # logo del prodotto (quadrato, png/svg)
 ordine: 1               # ordine nella griglia
 ---
 Testo libero in markdown: cos'è, a chi serve, caratteristiche, requisiti.
