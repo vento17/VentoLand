@@ -1,0 +1,25 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import { getCollection } from 'astro:content';
+const prodotti = (await getCollection('prodotti')).sort((a, b) => a.data.ordine - b.data.ordine);
+const software = prodotti.filter(p => p.data.tipo !== 'hardware');
+const hardware = prodotti.filter(p => p.data.tipo === 'hardware');
+---
+<Base title="Prodotti">
+  <section class="section">
+    <div class="wrap">
+      <div class="eyebrow">Software e firmware</div>
+      <h1>Prodotti</h1>
+      <div class="grid cols-3">{software.map(p => <ProductCard p={p} />)}</div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap">
+      <div class="eyebrow">Hardware</div>
+      <h2>Schede e interfacce</h2>
+      <p class="lead">In arrivo dopo la certificazione CE / RoHS. Se ti interessa, scrivimi e ti avviso quando sono disponibili.</p>
+      <div class="grid cols-3">{hardware.map(p => <ProductCard p={p} />)}</div>
+    </div>
+  </section>
+</Base>

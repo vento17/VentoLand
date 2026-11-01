@@ -1,0 +1,59 @@
+---
+import Base from '../layouts/Base.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { getCollection } from 'astro:content';
+const prodotti = (await getCollection('prodotti')).sort((a, b) => a.data.ordine - b.data.ordine);
+const campo = (await getCollection('campo')).sort((a, b) => b.data.data.valueOf() - a.data.data.valueOf()).slice(0, 3);
+---
+<Base>
+  <section class="hero">
+    <div class="wrap">
+      <div class="eyebrow">VentoLand · software e hardware per lo spettacolo</div>
+      <h1>Fatto in palco,<br />per il palco.</h1>
+      <p class="lead">Strumenti per show control, DMX, LED e visual in tempo reale. Scritti da un tecnico luci, usati davvero in tour e in teatro, venduti a prezzi da collega a collega.</p>
+      <p><a class="btn primary" href="/prodotti">Vedi i prodotti</a> &nbsp; <a class="btn" href="/sul-campo">Guarda dove sono stati usati</a></p>
+      <!-- Sostituisci con un tuo video: metti il file in public/video/hero.mp4 -->
+      <div class="placeholder" style="margin-top:2.5rem;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center">
+        qui va il video hero · public/video/hero.mp4
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="eyebrow">Prodotti</div>
+      <div class="grid cols-3">
+        {prodotti.map(p => <ProductCard p={p} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="eyebrow">Sul campo</div>
+      <h2>Spettacoli e lavori dove questi strumenti hanno girato.</h2>
+      {campo.length === 0 && <div class="placeholder">Aggiungi un file in src/content/campo/ per far comparire qui il primo lavoro.</div>}
+      <div class="grid cols-3">
+        {campo.map(c => (
+          <a class="card" href={`/sul-campo/${c.id}`}>
+            <div class="meta"><span>{c.data.data.getFullYear()}</span>{c.data.luogo && <span>{c.data.luogo}</span>}</div>
+            <h3>{c.data.titolo}</h3>
+            <p class="tagline">{c.data.ruolo}</p>
+            <div class="meta">{c.data.prodotti.join(' · ')}</div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="eyebrow">Come funziona</div>
+      <div class="grid cols-3">
+        <div class="card"><h3>Licenze semplici</h3><p class="tagline">Compri una volta, la licenza è tua. Aggiornamenti inclusi per un anno. Il software gira offline: nessun check di rete a show iniziato.</p></div>
+        <div class="card"><h3>Pagamento sicuro</h3><p class="tagline">Carta o PayPal, in qualsiasi valuta, fattura automatica. Chiave e download arrivano via email in un minuto.</p></div>
+        <div class="card"><h3>Supporto da chi lo usa</h3><p class="tagline">Se qualcosa non va te lo risolve chi ha scritto il codice, e ha passato le stesse serate in regia.</p></div>
+      </div>
+    </div>
+  </section>
+</Base>

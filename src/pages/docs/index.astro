@@ -1,0 +1,28 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+const docs = (await getCollection('docs')).sort((a, b) => a.data.ordine - b.data.ordine);
+const gruppi = new Map<string, typeof docs>();
+for (const d of docs) {
+  const k = d.data.prodotto ?? 'Generale';
+  if (!gruppi.has(k)) gruppi.set(k, []);
+  gruppi.get(k)!.push(d);
+}
+---
+<Base title="Documentazione">
+  <section class="section">
+    <div class="wrap">
+      <div class="eyebrow">Docs</div>
+      <h1>Documentazione</h1>
+      {docs.length === 0 && <div class="placeholder">Nessuna pagina ancora. Aggiungi file .md in src/content/docs/.</div>}
+      {[...gruppi].map(([nome, pagine]) => (
+        <div style="margin-top:2rem">
+          <h2 class="mono" style="font-size:1rem;text-transform:uppercase;letter-spacing:.1em;color:var(--fg-3)">{nome}</h2>
+          <ul style="list-style:none;padding:0;margin:0;border-top:1px solid var(--line)">
+            {pagine.map(p => <li style="border-bottom:1px solid var(--line)"><a style="display:block;padding:.8rem 0" href={`/docs/${p.id}`}>{p.data.titolo}</a></li>)}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+</Base>

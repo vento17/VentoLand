@@ -1,0 +1,45 @@
+---
+import '../styles/global.css';
+interface Props { title?: string; description?: string; }
+const { title, description = 'Software e hardware per lo spettacolo dal vivo, fatti in palco da chi li usa.' } = Astro.props;
+const fullTitle = title ? `${title} — VentoLand` : 'VentoLand — strumenti per tecnici e artisti';
+const path = Astro.url.pathname;
+const nav = [
+  { href: '/prodotti', label: 'Prodotti' },
+  { href: '/sul-campo', label: 'Sul campo' },
+  { href: '/docs', label: 'Docs' },
+  { href: '/about', label: 'About' },
+];
+---
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+  </head>
+  <body>
+    <header class="site-head">
+      <div class="wrap">
+        <a class="brand" href="/">VentoLand</a>
+        <nav class="main">
+          {nav.map(n => <a href={n.href} aria-current={path.startsWith(n.href) ? 'page' : undefined}>{n.label}</a>)}
+        </nav>
+      </div>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site-foot">
+      <div class="wrap">
+        <div>© {new Date().getFullYear()} VentoLand · ventoland.it</div>
+        <div class="mono">fatto in palco, per il palco</div>
+      </div>
+    </footer>
+  </body>
+</html>

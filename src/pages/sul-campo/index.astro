@@ -1,0 +1,25 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+const campo = (await getCollection('campo')).sort((a, b) => b.data.data.valueOf() - a.data.data.valueOf());
+---
+<Base title="Sul campo">
+  <section class="section">
+    <div class="wrap">
+      <div class="eyebrow">Sul campo</div>
+      <h1>Dove hanno girato.</h1>
+      <p class="lead">Spettacoli, tour e installazioni in cui questi strumenti hanno lavorato davvero. Foto e video dal palco, non render.</p>
+      {campo.length === 0 && <div class="placeholder">Nessun lavoro ancora. Crea un file in src/content/campo/ (vedi README).</div>}
+      <div class="grid cols-3">
+        {campo.map(c => (
+          <a class="card" href={`/sul-campo/${c.id}`} style={c.data.copertina ? `background-image:linear-gradient(to top, var(--bg) 20%, transparent), url(${c.data.copertina});background-size:cover;background-position:center;min-height:260px;justify-content:flex-end` : ''}>
+            <div class="meta"><span>{c.data.data.getFullYear()}</span>{c.data.luogo && <span>{c.data.luogo}</span>}</div>
+            <h3>{c.data.titolo}</h3>
+            <p class="tagline" style="flex:0">{c.data.ruolo}</p>
+            <div class="meta">{c.data.prodotti.join(' · ')}</div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,31 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const docs = await getCollection('docs');
+  return docs.map(d => ({ params: { slug: d.id }, props: { d } }));
+}
+const { d } = Astro.props;
+const { Content } = await render(d);
+const sorelle = (await getCollection('docs')).filter(x => x.data.prodotto === d.data.prodotto).sort((a, b) => a.data.ordine - b.data.ordine);
+---
+<Base title={d.data.titolo}>
+  <section class="section">
+    <div class="wrap" style="display:grid;gap:3rem;grid-template-columns:minmax(0,1fr) minmax(0,3fr)">
+      <aside>
+        <div class="eyebrow">{d.data.prodotto ?? 'Docs'}</div>
+        <ul style="list-style:none;padding:0;margin:0;font-size:.9rem">
+          {sorelle.map(s => <li style="padding:.3rem 0"><a href={`/docs/${s.id}`} style={s.id === d.id ? 'color:var(--fg)' : 'color:var(--fg-2)'}>{s.data.titolo}</a></li>)}
+        </ul>
+      </aside>
+      <article class="prose">
+        <h1>{d.data.titolo}</h1>
+        <Content />
+      </article>
+    </div>
+  </section>
+</Base>
+<style>
+  @media (max-width: 760px) { .wrap[style*="grid"] { grid-template-columns: 1fr !important; } }
+</style>

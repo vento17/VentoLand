@@ -1,0 +1,13 @@
+---
+interface Props { p: any }
+const { p } = Astro.props;
+const d = p.data;
+const statoClass = d.stato === 'disponibile' ? 'ok' : d.stato === 'beta' ? 'warn' : '';
+const statoLabel = { disponibile: 'disponibile', beta: 'beta', 'in-arrivo': 'in arrivo' }[d.stato];
+---
+<a class="card" href={`/prodotti/${p.id}`}>
+  <div class="meta"><span>{d.tipo}</span><span class={`tag ${statoClass}`}>{statoLabel}</span></div>
+  <h3>{d.nome}</h3>
+  <p class="tagline">{d.tagline}</p>
+  <div class="meta">{d.prezzo && <span>{d.prezzo}</span>}{d.piattaforme.length > 0 && <span>{d.piattaforme.join(' · ')}</span>}</div>
+</a>

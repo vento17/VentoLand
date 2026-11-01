@@ -1,0 +1,55 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const prodotti = await getCollection('prodotti');
+  return prodotti.map(p => ({ params: { slug: p.id }, props: { p } }));
+}
+const { p } = Astro.props;
+const d = p.data;
+const { Content } = await render(p);
+const campo = (await getCollection('campo')).filter(c => c.data.prodotti.includes(p.id));
+const statoLabel = { disponibile: 'disponibile', beta: 'beta', 'in-arrivo': 'in arrivo' }[d.stato];
+const statoClass = d.stato === 'disponibile' ? 'ok' : d.stato === 'beta' ? 'warn' : '';
+---
+<Base title={d.nome} description={d.tagline}>
+  <section class="hero">
+    <div class="wrap">
+      <div class="eyebrow">{d.tipo} · <span class={`tag ${statoClass}`}>{statoLabel}</span></div>
+      <h1>{d.nome}</h1>
+      <p class="lead">{d.tagline}</p>
+      <p>
+        {d.buy_url && d.stato !== 'in-arrivo' && <a class="btn primary" href={d.buy_url}>Compra {d.prezzo && `· ${d.prezzo}`}</a>}
+        {!d.buy_url && d.prezzo && <span class="btn">{d.prezzo}</span>}
+        {d.docs_url && <> &nbsp; <a class="btn" href={d.docs_url}>Documentazione</a></>}
+        {d.repo_url && <> &nbsp; <a class="btn" href={d.repo_url}>Codice</a></>}
+      </p>
+      {d.immagine
+        ? <img src={d.immagine} alt={d.nome} />
+        : <div class="placeholder" style="margin-top:2.5rem;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center">screenshot o video di {d.nome} · campo "immagine" nel file .md</div>}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap" style="display:grid;gap:3rem;grid-template-columns:minmax(0,2fr) minmax(0,1fr)">
+      <div class="prose"><Content /></div>
+      <aside>
+        <div class="eyebrow">Scheda</div>
+        <dl class="specs">
+          <dt>Tipo</dt><dd>{d.tipo}</dd>
+          <dt>Stato</dt><dd>{statoLabel}</dd>
+          {d.piattaforme.length > 0 && <><dt>Piattaforme</dt><dd>{d.piattaforme.join(', ')}</dd></>}
+          {d.prezzo && <><dt>Prezzo</dt><dd>{d.prezzo}</dd></>}
+        </dl>
+        {campo.length > 0 && <>
+          <div class="eyebrow" style="margin-top:2rem">Usato in</div>
+          <ul style="padding-left:1.1rem">{campo.map(c => <li><a href={`/sul-campo/${c.id}`}>{c.data.titolo}</a> <span class="mono" style="color:var(--fg-3)">{c.data.data.getFullYear()}</span></li>)}</ul>
+        </>}
+      </aside>
+    </div>
+  </section>
+</Base>
+<style>
+  @media (max-width: 760px) { .wrap[style] { grid-template-columns: 1fr !important; } }
+</style>

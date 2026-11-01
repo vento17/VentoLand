@@ -1,0 +1,52 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const campo = await getCollection('campo');
+  return campo.map(c => ({ params: { slug: c.id }, props: { c } }));
+}
+const { c } = Astro.props;
+const d = c.data;
+const { Content } = await render(c);
+const prodotti = (await getCollection('prodotti')).filter(p => d.prodotti.includes(p.id));
+const fmt = new Intl.DateTimeFormat('it-IT', { month: 'long', year: 'numeric' });
+
+function embed(url: string) {
+  const yt = url.match(/(?:youtu\.be\/|v=|shorts\/)([\w-]{6,})/);
+  if (yt) return `https://www.youtube-nocookie.com/embed/${yt[1]}`;
+  const vm = url.match(/vimeo\.com\/(\d+)/);
+  if (vm) return `https://player.vimeo.com/video/${vm[1]}`;
+  return url;
+}
+---
+<Base title={d.titolo} description={d.ruolo}>
+  <section class="hero">
+    <div class="wrap">
+      <div class="eyebrow">{fmt.format(d.data)}{d.luogo && ` · ${d.luogo}`}</div>
+      <h1>{d.titolo}</h1>
+      {d.ruolo && <p class="lead">{d.ruolo}</p>}
+      {d.video
+        ? <iframe class="video-embed" src={embed(d.video)} allow="fullscreen; picture-in-picture" allowfullscreen loading="lazy" title={d.titolo}></iframe>
+        : d.copertina && <img src={d.copertina} alt={d.titolo} />}
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap" style="display:grid;gap:3rem;grid-template-columns:minmax(0,2fr) minmax(0,1fr)">
+      <div class="prose"><Content /></div>
+      <aside>
+        {prodotti.length > 0 && <>
+          <div class="eyebrow">Strumenti usati</div>
+          <ul style="padding-left:1.1rem">{prodotti.map(p => <li><a href={`/prodotti/${p.id}`}>{p.data.nome}</a></li>)}</ul>
+        </>}
+      </aside>
+    </div>
+    {d.galleria.length > 0 && <div class="wrap" style="margin-top:3rem">
+      <div class="eyebrow">Galleria</div>
+      <div class="gallery">{d.galleria.map(src => <a href={src}><img src={src} alt="" loading="lazy" /></a>)}</div>
+    </div>}
+  </section>
+</Base>
+<style>
+  @media (max-width: 760px) { .wrap[style*="grid"] { grid-template-columns: 1fr !important; } }
+</style>
