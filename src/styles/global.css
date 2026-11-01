@@ -34,7 +34,8 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 2rem 0; }
 /* header */
 .site-head { border-bottom: 1px solid var(--line); position: sticky; top: 0; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); z-index: 10; }
 .site-head .wrap { display: flex; align-items: center; justify-content: space-between; height: 56px; gap: 1rem; }
-.brand { font-family: var(--mono); font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+.brand { font-family: var(--mono); font-weight: 700; letter-spacing: .04em; text-transform: uppercase; display: inline-flex; align-items: center; gap: .6rem; }
+.brand img { width: 26px; height: 32px; }
 .brand span { color: var(--fg-3); font-weight: 400; }
 nav.main { display: flex; gap: 1.25rem; font-size: .9rem; color: var(--fg-2); }
 nav.main a[aria-current="page"] { color: var(--fg); }
