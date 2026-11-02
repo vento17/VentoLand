@@ -1,0 +1,30 @@
+---
+// Progetti esterni: loghi in public/logo/partner/, link qui sotto.
+const partners = [
+  { nome: 'DeltaProcess', logo: '/logo/partner/deltaprocess.png', url: '#' },
+  { nome: 'VoxelStudio',  logo: '/logo/partner/voxelstudio.png',  url: '#' },
+  { nome: 'MagnumPy',     logo: '/logo/partner/magnumpy.png',     url: '#' },
+];
+import fs from 'node:fs';
+const exists = (p: string) => fs.existsSync('public' + p);
+---
+<section class="partners">
+  <div class="wrap">
+    <div class="eyebrow">Sviluppati con e per</div>
+    <div class="row">
+      {partners.map(p => (
+        <a href={p.url} target="_blank" rel="noopener" title={p.nome}>
+          {exists(p.logo) ? <img src={p.logo} alt={p.nome} loading="lazy" /> : <span class="ph">{p.nome}</span>}
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+<style>
+  .partners { border-top: 1px solid var(--line); padding: 2.5rem 0 0; margin-top: 4rem; }
+  .row { display: flex; flex-wrap: wrap; gap: 2.5rem; align-items: center; }
+  .row a { display: block; opacity: .7; }
+  .row a:hover { opacity: 1; }
+  .row img { height: 48px; width: auto; }
+  .ph { font-family: var(--mono); font-size: .8rem; color: var(--fg-3); border: 1px dashed var(--line); padding: .8rem 1.2rem; }
+</style>

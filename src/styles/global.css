@@ -41,7 +41,7 @@ nav.main { display: flex; gap: 1.25rem; font-size: .9rem; color: var(--fg-2); }
 nav.main a[aria-current="page"] { color: var(--fg); }
 
 /* footer */
-.site-foot { border-top: 1px solid var(--line); margin-top: 5rem; padding: 2rem 0 3rem; color: var(--fg-3); font-size: .85rem; }
+.site-foot { border-top: 1px solid var(--line); margin-top: 2.5rem; padding: 2rem 0 3rem; color: var(--fg-3); font-size: .85rem; }
 .site-foot .wrap { display: flex; flex-wrap: wrap; gap: 1rem 2rem; justify-content: space-between; }
 
 /* layout bits */

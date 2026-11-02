@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import Partners from '../components/Partners.astro';
 interface Props { title?: string; description?: string; }
 const { title, description = 'Software e hardware per lo spettacolo dal vivo, fatti in palco da chi li usa.' } = Astro.props;
 const fullTitle = title ? `${title} — VentoLand` : 'VentoLand — strumenti per tecnici e artisti';
@@ -35,6 +36,7 @@ const nav = [
     <main>
       <slot />
     </main>
+    <Partners />
     <footer class="site-foot">
       <div class="wrap">
         <div>© {new Date().getFullYear()} VentoLand · ventoland.it</div>
