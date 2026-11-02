@@ -4,6 +4,7 @@ tagline: Visual mixer in TouchDesigner. Pool di clip, post FX, color correction,
 tipo: software
 stato: in-arrivo
 piattaforme: [TouchDesigner]
+tags: [touchdesigner, software]
 ordine: 4
 ---
 

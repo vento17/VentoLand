@@ -16,6 +16,7 @@ const prodotti = defineCollection({
     piattaforme: z.array(z.string()).default([]),
     immagine: z.string().optional(),        // es. /img/maestrale.jpg
     logo: z.string().optional(),            // es. /logo/prodotti/ventonet.png
+    tags: z.array(z.string()).default([]),  // es. [free, opensource, esp32]
     ordine: z.number().default(99),
   }),
 });

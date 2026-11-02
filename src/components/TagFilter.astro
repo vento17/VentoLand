@@ -1,0 +1,28 @@
+---
+// Barra filtri per tag. Filtra le .card.product nella stessa pagina (client-side).
+interface Props { tags: string[] }
+const { tags } = Astro.props;
+---
+<div class="tagfilter" data-tagfilter>
+  <button type="button" data-tag="" aria-pressed="true">tutti</button>
+  {tags.map(t => <button type="button" data-tag={t} aria-pressed="false">{t}</button>)}
+</div>
+<style>
+  .tagfilter { display: flex; flex-wrap: wrap; gap: .4rem; margin: 0 0 1.25rem; }
+  .tagfilter button { font-family: var(--mono); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; padding: .35em .7em; border: 1px solid var(--line); background: transparent; color: var(--fg-2); border-radius: 2px; cursor: pointer; }
+  .tagfilter button:hover { border-color: var(--fg-3); color: var(--fg); }
+  .tagfilter button[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+</style>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-tagfilter]').forEach(bar => {
+    const btns = Array.from(bar.querySelectorAll<HTMLButtonElement>('button'));
+    const cards = Array.from(document.querySelectorAll<HTMLElement>('.card.product'));
+    const apply = (tag: string) => {
+      btns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.tag === tag)));
+      cards.forEach(c => { const t = (c.dataset.tags || '').split(' '); c.style.display = !tag || t.includes(tag) ? '' : 'none'; });
+      history.replaceState(null, '', tag ? `#tag=${tag}` : location.pathname);
+    };
+    btns.forEach(b => b.addEventListener('click', () => apply(b.dataset.tag || '')));
+    const m = location.hash.match(/#tag=([\w-]+)/); if (m) apply(m[1]);
+  });
+</script>

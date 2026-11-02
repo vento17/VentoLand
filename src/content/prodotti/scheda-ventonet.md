@@ -3,6 +3,7 @@ nome: Scheda VentoNet / VentoLed
 tagline: PCB custom su WT32-ETH01, con firmware precaricato. Disponibile dopo certificazione CE / RoHS.
 tipo: hardware
 stato: in-arrivo
+tags: [esp32, hardware]
 ordine: 10
 ---
 

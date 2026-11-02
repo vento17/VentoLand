@@ -2,15 +2,17 @@
 import Base from '../layouts/Base.astro';
 import ProductCard from '../components/ProductCard.astro';
 import Carousel from '../components/Carousel.astro';
+import TagFilter from '../components/TagFilter.astro';
 import { getCollection } from 'astro:content';
 const prodotti = (await getCollection('prodotti')).sort((a, b) => a.data.ordine - b.data.ordine);
+const tags = [...new Set(prodotti.flatMap(p => p.data.tags))].sort();
 const campo = (await getCollection('campo')).sort((a, b) => b.data.data.valueOf() - a.data.data.valueOf()).slice(0, 6);
 ---
 <Base>
   <section class="hero">
     <div class="wrap">
       <div style="display:flex;align-items:center;gap:1.25rem;margin-bottom:1.5rem">
-        <img src="/logo/ventoland-white.svg" alt="VentoLand" width="64" height="80" />
+        <img src="/logo/ventoland-white.svg" alt="VentoLand" width="72" height="77" />
         <div>
           <h1 style="margin:0">Fatto in palco,<br />per il palco.</h1>
         </div>
@@ -23,6 +25,7 @@ const campo = (await getCollection('campo')).sort((a, b) => b.data.data.valueOf(
   <section class="section" id="prodotti">
     <div class="wrap">
       <div class="eyebrow"><a href="/prodotti">Prodotti →</a></div>
+      <TagFilter tags={tags} />
       <div class="grid cols-3">
         {prodotti.map(p => <ProductCard p={p} />)}
       </div>

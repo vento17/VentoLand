@@ -44,6 +44,7 @@ const statoClass = d.stato === 'disponibile' ? 'ok' : d.stato === 'beta' ? 'warn
           <dt>Stato</dt><dd>{statoLabel}</dd>
           {d.piattaforme.length > 0 && <><dt>Piattaforme</dt><dd>{d.piattaforme.join(', ')}</dd></>}
           {d.prezzo && <><dt>Prezzo</dt><dd>{d.prezzo}</dd></>}
+          {d.tags.length > 0 && <><dt>Tag</dt><dd>{d.tags.map((t: string) => <a class="tag" href={`/prodotti#tag=${t}`} style="margin:0 .3rem .3rem 0">{t}</a>)}</dd></>}
         </dl>
         {campo.length > 0 && <>
           <div class="eyebrow" style="margin-top:2rem">Usato in</div>

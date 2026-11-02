@@ -1,16 +1,19 @@
 ---
 import Base from '../../layouts/Base.astro';
 import ProductCard from '../../components/ProductCard.astro';
+import TagFilter from '../../components/TagFilter.astro';
 import { getCollection } from 'astro:content';
 const prodotti = (await getCollection('prodotti')).sort((a, b) => a.data.ordine - b.data.ordine);
 const software = prodotti.filter(p => p.data.tipo !== 'hardware');
 const hardware = prodotti.filter(p => p.data.tipo === 'hardware');
+const tags = [...new Set(prodotti.flatMap(p => p.data.tags))].sort();
 ---
 <Base title="Prodotti">
   <section class="section">
     <div class="wrap">
       <div class="eyebrow">Software e firmware</div>
       <h1>Prodotti</h1>
+      <TagFilter tags={tags} />
       <div class="grid cols-3">{software.map(p => <ProductCard p={p} />)}</div>
     </div>
   </section>

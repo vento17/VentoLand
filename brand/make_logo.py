@@ -2,9 +2,9 @@ import os
 ARC = "M-26.2,-42.6 A50,50 0 1 0 26.2,-42.6"
 V = "M-43.2,-83.2 L0,20 L43.2,-83.2"
 def svg(color, bg=None, flat=False, size=None):
-    vb = "-60 -95 120 150"
-    w = f' width="{size}" height="{int(size*150/120)}"' if size else ''
-    bgr = f'<rect x="-60" y="-95" width="120" height="150" fill="{bg}"/>' if bg else ''
+    vb = "-55 -64 110 118" if not bg else "-64 -69 128 128"
+    w = f' width="{size}" height="{int(size*118/110)}"' if size else ''
+    bgr = f'<rect x="-64" y="-69" width="128" height="128" fill="{bg}"/>' if bg else ''
     if flat:
         stroke = color
         defs = ''

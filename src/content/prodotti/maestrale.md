@@ -4,10 +4,11 @@ tagline: Show control touchscreen. Cue, widget, router Art-Net/sACN, tutto su un
 tipo: software
 logo: /logo/prodotti/maestrale.jpg
 stato: beta
-prezzo: da definire
+prezzo: gratis
 piattaforme: [Windows]
 repo_url: https://github.com/vento17/Maestrale
 docs_url: /docs/maestrale/introduzione
+tags: [free, opensource, software]
 ordine: 1
 ---
 

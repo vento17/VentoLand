@@ -5,6 +5,7 @@ tipo: firmware
 logo: /logo/prodotti/ventoled.jpg
 stato: in-arrivo
 piattaforme: [ESP32 WT32-ETH01]
+tags: [esp32, firmware]
 ordine: 3
 ---
 

@@ -5,6 +5,7 @@ tipo: firmware
 logo: /logo/prodotti/ventonet.jpg
 stato: in-arrivo
 piattaforme: [ESP32 WT32-ETH01]
+tags: [esp32, firmware]
 ordine: 2
 ---
 
