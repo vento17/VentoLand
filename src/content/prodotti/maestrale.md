@@ -1,33 +1,39 @@
 ---
 nome: Maestrale
-tagline: Show control touchscreen. Cue, widget, router Art-Net/sACN, tutto su uno schermo che si usa con le dita.
+tagline: Costruisci il tuo controller touch per lo show. Fader, cue, timeline, router. Esce in MIDI, OSC, Art-Net, sACN e DMX.
 tipo: software
 logo: /logo/prodotti/maestrale.jpg
 stato: beta
 prezzo: gratis
-piattaforme: [Windows]
+piattaforme: [Windows, macOS]
 repo_url: https://github.com/vento17/Maestrale
+buy_url: https://github.com/vento17/Maestrale/releases/latest
 docs_url: /docs/maestrale/introduzione
-tags: [free, opensource, software]
+tags: [free, opensource, software, osc, midi, dmx, art-net, sacn, eos]
 ordine: 1
 ---
 
 ## Cos'è
 
-Maestrale è un'interfaccia di show control pensata per essere usata in regia con un touchscreen: cue list, pulsanti, fader e widget configurabili, un router che smista Art-Net, sACN, OSC e DMX da e verso tutto quello che hai in rete.
+Maestrale è un costruttore di superfici di controllo touch per lo spettacolo dal vivo. Componi il layout che ti serve con slider, manopole, pulsanti, pad XY, LFO, inviluppi, step sequencer, una timeline multitraccia, cue e submaster, e mandi tutto fuori via **MIDI, OSC, Art-Net, sACN** ed **Enttec Open DMX**.
 
-## A chi serve
+Click destro su qualsiasi controllo per collegarlo a un altro (master/slave attraverso il Router), registrare cue, sincronizzarsi al timecode LTC/MTC, e controllare tutto da remoto dal browser di un telefono o tablet.
 
-A chi fa spettacoli piccoli e medi e non vuole portarsi dietro una console da 30 kg per lanciare venti cue e un paio di effetti.
+## Per chi fa luci
 
-## Caratteristiche principali
+C'è una superficie **ETC Eos** completa: ogni tasto, quattro encoder che paginano con la console, la ruota dei livelli, i master e il Grandmaster. Gli encoder sono infiniti e mandano solo la variazione, così la console non salta mai, e Maestrale lavora con un utente Eos suo, senza litigare con l'operatore.
 
-- Cue list con go, back, goto, tempi di fade
-- Pagine di pulsanti e fader liberamente configurabili
-- Router Art-Net / sACN / OSC / DMX, con filtri e ricerca
-- Registratore e player di stream Art-Net / sACN
-- Funziona offline: la licenza viene verificata una volta, poi basta
+Una superficie hardware entra via MIDI: il widget **iControls** riconosce un iCON iControls in modalità Mackie, nove fader e nove manopole, ognuno una cella che puoi patchare dove vuoi. I colori arrivano da una **Palette** di swatch attraverso un **Merge** in LTP, e il widget **Shell** spegne il PC a fine serata da una riga del Clock: un'installazione si accende nel suo show e va a dormire da sola.
 
-## Requisiti
+## Download
 
-Windows 10/11. Un touchscreen aiuta ma non è obbligatorio.
+Build pronte nella pagina Releases: un `.exe` portable per Windows (niente da installare) e `.dmg` per macOS, Intel e Apple Silicon.
+
+## Note
+
+- L'ingresso video **Spout / NDI** è solo Windows; su altre piattaforme quei widget sono disattivati. NDI richiede il runtime NDI installato a parte.
+- I progetti salvati con la versione 0.3 e precedenti (`.liveforge`) si aprono senza modifiche.
+
+## Licenza
+
+Software libero, **GNU GPL v3.0 o successiva**. Puoi usarlo, ridistribuirlo e modificarlo; se lo modifichi e lo distribuisci, le modifiche restano libere.

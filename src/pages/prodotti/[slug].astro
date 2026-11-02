@@ -23,7 +23,7 @@ const statoClass = d.stato === 'disponibile' ? 'ok' : d.stato === 'beta' ? 'warn
       </div>
       <p class="lead">{d.tagline}</p>
       <p>
-        {d.buy_url && d.stato !== 'in-arrivo' && <a class="btn primary" href={d.buy_url}>Compra {d.prezzo && `· ${d.prezzo}`}</a>}
+        {d.buy_url && d.stato !== 'in-arrivo' && <a class="btn primary" href={d.buy_url}>{d.prezzo === 'gratis' ? 'Scarica · gratis' : `Compra${d.prezzo ? ` · ${d.prezzo}` : ''}`}</a>}
         {!d.buy_url && d.prezzo && <span class="btn">{d.prezzo}</span>}
         {d.docs_url && <> &nbsp; <a class="btn" href={d.docs_url}>Documentazione</a></>}
         {d.repo_url && <> &nbsp; <a class="btn" href={d.repo_url}>Codice</a></>}
