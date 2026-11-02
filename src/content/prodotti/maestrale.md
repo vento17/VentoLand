@@ -9,7 +9,7 @@ piattaforme: [Windows, macOS]
 repo_url: https://github.com/vento17/Maestrale
 buy_url: https://github.com/vento17/Maestrale/releases/latest
 docs_url: /docs/maestrale/introduzione
-tags: [free, opensource, software, osc, midi, dmx, art-net, sacn, eos]
+tags: [free, opensource, software]
 ordine: 1
 ---
 

@@ -5,7 +5,7 @@ tipo: software
 stato: beta
 prezzo: gratis
 piattaforme: [Windows]
-tags: [free, opensource, software, osc]
+tags: [free, opensource, software]
 ordine: 2
 ---
 
