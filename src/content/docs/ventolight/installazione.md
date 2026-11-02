@@ -59,9 +59,11 @@ La password è stampata nel pacchetto del flasher. Collega telefono o PC a quell
 
 **Monitor** — stato del sensore, indice di intensità, classificazione cool / neutral / warm con barra warmth, bucket 1..10, temperatura del sensore e spettro delle 12 bande visibili. Se il sensore non è rilevato, il monitor mostra il risultato della scansione I²C per capire se è un problema di cablaggio.
 
-**DMX Triggers** — la griglia dei trigger. Di fabbrica ce ne sono 9: tre fasce di intensità × tre di colore, tutti sul canale 1 con valori da 1 a 9. Per ognuno puoi cambiare canale, valore, range intensità e range warmth, poi *Save*. Con **+** e **−** aggiungi o togli trigger (fino a 18). Il trigger attivo si accende; premendone uno lo **forzi manualmente** — utile per provare le cue del recorder senza aspettare la luce giusta. Premilo di nuovo per tornare in automatico.
+**DMX Triggers** — la griglia dei trigger. Di fabbrica ce ne sono 9: tre fasce di intensità × tre di colore, tutti sul canale 1 con valori da 1 a 9. Per ognuno puoi cambiare canale e valore DMX, poi *Save*. I range di intensità e colore sono la griglia fissa: ogni trigger copre una fascia di intensità (bassa / media / alta) e una di colore (cool / neutral / warm). Con **+** e **−** aggiungi o togli trigger (fino a 18). Il trigger attivo si accende; premendone uno lo **forzi manualmente** — utile per provare le cue del recorder senza aspettare la luce giusta. Premilo di nuovo per tornare in automatico.
 
 **OSC** — indirizzo IP di destinazione (default broadcast `4.3.2.255`), porta (`9000`), address (`/ventolight/light`) e i 4 slot del messaggio. Ogni slot può essere: `intensity`, `warmth`, `trigger`, `temperature`, `bucket`, `cool`, `green`, `warm`. *Save OSC* applica subito.
+
+Tutto quello che salvi (trigger, numero di trigger, OSC) resta in memoria anche spegnendo la scheda. Per tornare ai valori di fabbrica, flasha con *Erase board before flashing* acceso.
 
 ## Come ragiona il DMX
 
@@ -72,10 +74,6 @@ Su un recorder tipo VentoNet basta assegnare a ogni valore una cue: la luce camb
 ## Calibrare nello spazio
 
 L'indice di intensità **non è in lux**: è un numero relativo ricavato dalle bande visibili. Il modo giusto di impostare le soglie è stare nello spazio dell'installazione nei momenti che contano (mattina, sera, luci accese, luci spente), leggere i valori sul Monitor e scrivere i range dei trigger di conseguenza. Tienili un po' larghi: la luce oscilla.
-
-## Nota importante
-
-In questa versione le soglie dei trigger e la configurazione OSC **non vengono salvate** allo spegnimento: al riavvio tornano ai valori di fabbrica. Annota la configurazione che hai trovato (foto della pagina) e rimettila all'accensione. La memoria permanente arriva nella prossima versione.
 
 ## Problemi comuni
 

@@ -32,7 +32,7 @@ Nasce per un allestimento in Marocco, dove doveva reagire sia a quanta luce c'er
 
 - Sensore spettrale AS7265x via I²C, LED di bordo spenti per non inquinare la misura
 - Indice di intensità relativo + warmth 0..1 + bucket 1..10 + temperatura interna del sensore
-- Fino a 18 trigger configurabili (canale DMX, valore, range intensità, range colore)
+- Griglia di trigger intensità × colore, fino a 18, con canale e valore DMX configurabili per ciascuno
 - Uscita DMX continua a 250 kbaud con la stessa logica di VentoNet
 - OSC UDP in broadcast, indirizzo/porta/slot configurabili
 - Access point WiFi autonomo con pagina web di monitor e configurazione
@@ -46,4 +46,4 @@ Nasce per un allestimento in Marocco, dove doveva reagire sia a quanta luce c'er
 
 ## Stato
 
-Beta. Firmware funzionante e flasher pronto. Le soglie dei trigger e la configurazione OSC per ora si impostano a ogni accensione: la memoria permanente è il prossimo passo.
+Beta. Firmware funzionante, flasher pronto, configurazione salvata in memoria permanente. Sviluppato per un allestimento che poi non è andato in porto: cerca casa in una nuova installazione.
