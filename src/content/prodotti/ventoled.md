@@ -2,6 +2,7 @@
 nome: VentoLed
 tagline: Art-Net / sACN → LED a pixel su sei uscite SPI. Stesso cervello di VentoNet, per le strisce.
 tipo: firmware
+logo: /logo/prodotti/ventoled.jpg
 stato: in-arrivo
 piattaforme: [ESP32 WT32-ETH01]
 ordine: 3
