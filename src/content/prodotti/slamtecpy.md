@@ -6,7 +6,7 @@ logo: /logo/prodotti/slamtecpy.jpg
 stato: in-arrivo
 piattaforme: [Python]
 tags: [software, python]
-ordine: 6
+ordine: 7
 ---
 
 ## Cos'è

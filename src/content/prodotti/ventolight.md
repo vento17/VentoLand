@@ -5,7 +5,7 @@ tipo: software
 logo: /logo/prodotti/ventolight.jpg
 stato: in-arrivo
 tags: [esp32, firmware]
-ordine: 5
+ordine: 6
 ---
 
 ## Cos'è
