@@ -10,7 +10,7 @@ const exists = (p: string) => fs.existsSync('public' + p);
 ---
 <section class="partners">
   <div class="wrap">
-    <div class="eyebrow">Sviluppati con e per</div>
+    <div class="eyebrow" style="text-align:center">Sviluppati con e per</div>
     <div class="row">
       {partners.map(p => (
         <a href={p.url} target="_blank" rel="noopener" title={p.nome}>
@@ -21,10 +21,11 @@ const exists = (p: string) => fs.existsSync('public' + p);
   </div>
 </section>
 <style>
-  .partners { border-top: 1px solid var(--line); padding: 2.5rem 0 0; margin-top: 4rem; }
-  .row { display: flex; flex-wrap: wrap; gap: 2.5rem; align-items: center; }
+  .partners { border-top: 1px solid var(--line); padding: 3rem 0 1rem; margin-top: 4rem; }
+  .row { display: flex; flex-wrap: wrap; gap: 3rem 4rem; align-items: center; justify-content: center; }
   .row a { display: block; opacity: .7; }
   .row a:hover { opacity: 1; }
-  .row img { height: 96px; width: auto; }
+  .row img { height: 160px; width: auto; }
+  @media (max-width: 640px) { .row img { height: 110px; } .row { gap: 2rem; } }
   .ph { font-family: var(--mono); font-size: .8rem; color: var(--fg-3); border: 1px dashed var(--line); padding: .8rem 1.2rem; }
 </style>
