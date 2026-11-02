@@ -1,9 +1,9 @@
 ---
 // Progetti esterni: loghi in public/logo/partner/, link qui sotto.
 const partners = [
-  { nome: 'DeltaProcess', logo: '/logo/partner/deltaprocess.png', url: '#' },
+  { nome: 'DeltaProcess', logo: '/logo/partner/deltaprocess.png', url: 'https://www.deltaprocess.it/' },
   { nome: 'VoxelStudio',  logo: '/logo/partner/voxelstudio.png',  url: '#' },
-  { nome: 'MagnumPy',     logo: '/logo/partner/magnumpy.png',     url: '#' },
+  { nome: 'MagnumPy',     logo: '/logo/partner/magnumpy.jpg',     url: 'https://www.patreon.com/c/Magnumpy' },
 ];
 import fs from 'node:fs';
 const exists = (p: string) => fs.existsSync('public' + p);
@@ -25,6 +25,6 @@ const exists = (p: string) => fs.existsSync('public' + p);
   .row { display: flex; flex-wrap: wrap; gap: 2.5rem; align-items: center; }
   .row a { display: block; opacity: .7; }
   .row a:hover { opacity: 1; }
-  .row img { height: 48px; width: auto; }
+  .row img { height: 96px; width: auto; }
   .ph { font-family: var(--mono); font-size: .8rem; color: var(--fg-3); border: 1px dashed var(--line); padding: .8rem 1.2rem; }
 </style>
