@@ -2,6 +2,7 @@
 nome: Ventouch
 tagline: VJ software procedurale in tempo reale, costruito su TouchDesigner. Mixer a livelli, preset con easing, media browser, beat sync, LUT.
 tipo: software
+logo: /logo/prodotti/ventouch.jpg
 stato: disponibile
 buy_url: https://www.patreon.com/c/Magnumpy
 video: https://youtube.com/shorts/o7xKJeJjkWE
