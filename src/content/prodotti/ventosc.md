@@ -2,6 +2,7 @@
 nome: VentOSC
 tagline: Un fader master OSC in una scatolina. Slider sul telefono o potenziometro fisico → OSC via Ethernet a 20 Hz, verso fino a 6 destinazioni.
 tipo: firmware
+logo: /logo/prodotti/ventosc.jpg
 stato: beta
 prezzo: gratis
 docs_url: /docs/ventosc/installazione
