@@ -56,3 +56,11 @@ Richiede TouchDesigner (licenza Derivative non inclusa).
 ## Come si ottiene
 
 Ventouch è distribuito tramite la pagina Patreon di MagnumPy, il collettivo con cui è sviluppato.
+
+## Video
+
+<iframe class="video-embed" src="https://www.youtube-nocookie.com/embed/WmqYbP0z3Ug?start=2" allow="fullscreen; picture-in-picture" allowfullscreen loading="lazy" title="Ventouch"></iframe>
+
+<iframe class="video-embed" src="https://www.youtube-nocookie.com/embed/RlKApFWOFyM?start=22" allow="fullscreen; picture-in-picture" allowfullscreen loading="lazy" title="Ventouch"></iframe>
+
+<iframe class="video-embed" src="https://www.youtube-nocookie.com/embed/gzt16VSlYw8?start=263" allow="fullscreen; picture-in-picture" allowfullscreen loading="lazy" title="Ventouch"></iframe>
