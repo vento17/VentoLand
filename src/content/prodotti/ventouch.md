@@ -4,7 +4,7 @@ tagline: VJ software procedurale in tempo reale, costruito su TouchDesigner. Mix
 tipo: software
 stato: disponibile
 buy_url: https://www.patreon.com/c/Magnumpy
-immagine: /img/ventouch/live-festival.jpg
+immagine: /img/ventouch/interfaccia.jpg
 piattaforme: [TouchDesigner]
 tags: [touchdesigner, software]
 ordine: 5
