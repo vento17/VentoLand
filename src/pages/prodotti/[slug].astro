@@ -9,6 +9,15 @@ export async function getStaticPaths() {
 const { p } = Astro.props;
 const d = p.data;
 const { Content } = await render(p);
+
+function embed(url: string) {
+  const yt = url.match(/(?:youtu\.be\/|v=|shorts\/)([\w-]{6,})/);
+  if (yt) return `https://www.youtube-nocookie.com/embed/${yt[1]}`;
+  const vm = url.match(/vimeo\.com\/(\d+)/);
+  if (vm) return `https://player.vimeo.com/video/${vm[1]}`;
+  return url;
+}
+const vertical = d.video ? /shorts\//.test(d.video) : false;
 const campo = (await getCollection('campo')).filter(c => c.data.prodotti.includes(p.id));
 const statoLabel = { disponibile: 'disponibile', beta: 'beta', 'in-arrivo': 'in arrivo' }[d.stato];
 const statoClass = d.stato === 'disponibile' ? 'ok' : d.stato === 'beta' ? 'warn' : '';
@@ -28,6 +37,7 @@ const statoClass = d.stato === 'disponibile' ? 'ok' : d.stato === 'beta' ? 'warn
         {d.docs_url && <> &nbsp; <a class="btn" href={d.docs_url}>Documentazione</a></>}
         {d.repo_url && <> &nbsp; <a class="btn" href={d.repo_url}>Codice</a></>}
       </p>
+      {d.video && <iframe class={vertical ? 'video-embed vertical' : 'video-embed'} src={embed(d.video)} allow="fullscreen; picture-in-picture" allowfullscreen loading="lazy" title={d.nome}></iframe>}
       {d.immagine
         ? <img src={d.immagine} alt={d.nome} />
         : <div class="placeholder" style="margin-top:2.5rem;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center">screenshot o video di {d.nome} · campo "immagine" nel file .md</div>}

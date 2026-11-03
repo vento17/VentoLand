@@ -19,6 +19,7 @@ prezzo: 49 €
 buy_url: https://...    # link checkout Lemon Squeezy (quando c'è)
 piattaforme: [Windows]
 immagine: /img/maestrale.jpg
+video: https://youtu.be/...    # opzionale, YouTube/Shorts/Vimeo, sopra l'immagine
 logo: /logo/prodotti/maestrale.jpg   # logo del prodotto (quadrato, png/svg)
 tags: [free, opensource, software]   # tag liberi, minuscoli; alimentano il filtro
 ordine: 1               # ordine nella griglia
