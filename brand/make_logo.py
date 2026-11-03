@@ -1,19 +1,19 @@
-import os
-ARC = "M-26.2,-42.6 A50,50 0 1 0 26.2,-42.6"
-V = "M-43.2,-83.2 L0,20 L43.2,-83.2"
-def svg(color, bg=None, flat=False, size=None):
-    vb = "-55 -64 110 118" if not bg else "-64 -69 128 128"
-    w = f' width="{size}" height="{int(size*118/110)}"' if size else ''
-    bgr = f'<rect x="-64" y="-69" width="128" height="128" fill="{bg}"/>' if bg else ''
+# Logo VentoLand definitivo (2026-11-03): due archi laterali sottili, V passante
+# che sfuma sopra e resta piena sotto, con l'angolo interno appoggiato al cerchio.
+ARCS = "M32.3,-38.1 A50,50 0 0 1 5.6,49.7 M-32.3,-38.1 A50,50 0 0 0 -5.6,49.7"
+V = "M-43.2,-83.2 L0,58.5 L43.2,-83.2"
+VFLAT = "M-33.6,-62.5 L0,58.5 L33.6,-62.5"   # versione piatta: aste tagliate dove finisce la sfumatura
+def svg(color, bg=None, flat=False):
+    # contenuto visibile: x ±53, y da -64 (fine sfumatura) a +69 (punta)
+    vb = "-64 -70 128 140" if not bg else "-70 -70 140 140"
+    bgr = f'<rect x="-70" y="-70" width="140" height="140" fill="{bg}"/>' if bg else ''
     if flat:
-        stroke = color
+        vtop = f'<path d="{VFLAT}" stroke="{color}" stroke-width="6"/>'
         defs = ''
-        vpath = "M-34.8,-63 L0,20 L34.8,-63"
     else:
-        stroke = "url(#g)"
-        defs = f'<defs><radialGradient id="g" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="72"><stop offset="0.736" stop-color="{color}" stop-opacity="1"/><stop offset="1" stop-color="{color}" stop-opacity="0"/></radialGradient></defs>'
-        vpath = V
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="{vb}"{w}>{defs}{bgr}<g fill="none" stroke-width="6" stroke-linecap="butt" stroke-linejoin="miter"><path d="{ARC}" stroke="{color}"/><path d="{vpath}" stroke="{stroke}"/></g></svg>'''
+        defs = f'<defs><radialGradient id="g" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="67"><stop offset="0.79" stop-color="{color}" stop-opacity="1"/><stop offset="1" stop-color="{color}" stop-opacity="0"/></radialGradient><clipPath id="t"><rect x="-80" y="-100" width="160" height="100"/></clipPath><clipPath id="b"><rect x="-80" y="0" width="160" height="100"/></clipPath></defs>'
+        vtop = f'<path d="{V}" stroke="url(#g)" stroke-width="6" clip-path="url(#t)"/><path d="{V}" stroke="{color}" stroke-width="6" clip-path="url(#b)"/>'
+    return f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{vb}">{defs}{bgr}<g fill="none" stroke-linecap="butt" stroke-linejoin="miter"><path d="{ARCS}" stroke="{color}" stroke-width="3"/>{vtop}</g></svg>'
 files = {
  "public/logo/ventoland-white.svg": svg("#ffffff"),
  "public/logo/ventoland-black.svg": svg("#000000"),
@@ -23,6 +23,5 @@ files = {
  "brand/ventoland-white-on-black.svg": svg("#ffffff", bg="#0b0c0e"),
  "brand/ventoland-black-on-white.svg": svg("#000000", bg="#ffffff"),
 }
-for p,c in files.items():
-    open(p,"w").write(c)
+for p,c in files.items(): open(p,"w").write(c)
 print("ok")
